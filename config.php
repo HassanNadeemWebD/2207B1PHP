@@ -1,13 +1,13 @@
 <?php
 $conn = mysqli_connect('localhost', 'root', '', '2207B1');
-if ($conn) {
+// if ($conn) {
 
-    echo "connection established";
-
-
-} 
+//     echo "connection established";
 
 
- echo mysqli_error($conn);
+// } 
+
+
+//  echo mysqli_error($conn);
 
 ?>

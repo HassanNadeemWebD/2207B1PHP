@@ -9,48 +9,67 @@
 </head>
 
 <body>
-    <h1>Hanndle Form</h1>
+    <h1>Handle Form</h1>
     <pre>
 
 <?php
+include 'config.php';
 
 // echo isset($_POST['submit']); 
 
 if (isset($_POST['submit'])) {
 
-print_r($_FILES['img']);
+    print_r($_FILES['img']);
 
 
     print_r($_POST);
     $firstName = $_POST['fname'];
     $lastName = $_POST['lname'];
     $age = $_POST['age'];
+    $gender = $_POST['gender'];
     $email = $_POST['email'];
-    $fileName = $_FILES['img']['name']; 
+    $contact = $_POST['contact'];
+    $course = $_POST['course'];
+    $fileName = $_FILES['img']['name'];
     $tmpName = $_FILES['img']['tmp_name'];
     $fileType = $_FILES['img']['type'];
 
 
-if($fileType == 'image/jpeg' || $fileType == 'image/jpg' || $fileType == 'image/png' ){
+    $query = "INSERT INTO `students` ( `firstName`, `lastName`, `age`, `gender`, `email`, `contact`, `course`, `picture`)
+     VALUES ( '$firstName', '$lastName', '$age', '$gender', '$email', '$contact', '$course', '$fileName')";
+    $res = mysqli_query($conn, $query);
+    if ($res) {
 
 
-    if(move_uploaded_file($tmpName,"uploads/".$fileName)){
 
-        echo "<script> alert('Image uploaded') </script>";
-        
-        
+        if ($fileType == 'image/jpeg' || $fileType == 'image/jpg' || $fileType == 'image/png') {
+
+
+            if (move_uploaded_file($tmpName, "uploads/" . $fileName)) {
+
+                echo "<script> alert('Image uploaded') </script>";
+
+
+            }
+
+
+        } else {
+
+            echo "<script> alert('Image is Not Uploaded , Please use JPG,JPEG or PNG file ') </script>";
+
+            // header('location: form.php');
+            echo "<script>window.location.href = 'form.php'</script>";
+
         }
 
 
-}
-else{
+        echo "<script> alert('Data Inserted') </script>";
 
-    echo "<script> alert('Image is Not Uploaded , Please use JPG,JPEG or PNG file ') </script>";
 
-// header('location: form.php');
-echo "<script>window.location.href = 'form.php'</script>";
+    }
 
-}
+
+
 
 
     // print_r($_GET);
@@ -62,13 +81,17 @@ echo "<script>window.location.href = 'form.php'</script>";
 
 
 
-            </pre>
-<img height="250" width="250" src="uploads/<?php echo  $fileName?>" alt="">
+                </pre>
+        <img height="250" width="250" src="uploads/<?php echo $fileName ?>" alt="">
         <h1>Welcome
             <?php echo $_POST['fname']; ?>
         </h1>
-        <p><?php echo "First Name:  $firstName"  ?></p>
-        <p><?php echo "last Name:  $lastName"  ?></p>
+        <p>
+            <?php echo "First Name:  $firstName" ?>
+        </p>
+        <p>
+            <?php echo "last Name:  $lastName" ?>
+        </p>
 
     <?php } ?>
 
