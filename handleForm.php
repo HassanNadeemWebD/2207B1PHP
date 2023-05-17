@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
             if (move_uploaded_file($tmpName, "uploads/" . $fileName)) {
 
                 echo "<script> alert('Image uploaded') </script>";
-
+                echo "<script>window.location.href = 'showdata.php'</script>";
 
             }
 

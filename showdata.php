@@ -1,6 +1,7 @@
 <?php include 'header.php'; ?>
 <section>
 
+
     <pre>
 <?php
 
@@ -32,6 +33,7 @@ print_r($res);
 <th>Contact</th>
 <th>Course</th>
 <th>Image</th>
+<th>Delete/Update</th>
 </tr>
 
 
@@ -64,6 +66,9 @@ print_r($res);
 <td><?php echo $row['contact'];?></td>
 <td><?php echo $row['course'];?></td>
 <td><img height="100" width="100" src="uploads/<?php echo $row['picture'];?>" alt=""> </td>
+<td><a href="update.php?id=<?php echo $row['id']?>"> <button class="btn btn-primary " >Update</button></a>
+<a href="delete.php?id=<?php echo $row['id']?>"> <button class="btn btn-danger" >Delete</button></a></td>
+
 
 
 
